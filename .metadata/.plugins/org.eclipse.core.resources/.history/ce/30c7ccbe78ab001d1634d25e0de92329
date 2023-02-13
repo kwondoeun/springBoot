@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<th:block th:fragment="함수(section)">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+
+	<header>
+		공통 템플릿 헤더
+	</header>
+	
+	<section th:replace="${section}">
+	
+	
+	</section>
+	
+	<section th:replace="${wrap}">
+	
+	
+	</section>
+	
+	<footer>
+		공통 템플릿 푸터
+	</footer>
+
+</body>
+</th:block>
+
+</html>

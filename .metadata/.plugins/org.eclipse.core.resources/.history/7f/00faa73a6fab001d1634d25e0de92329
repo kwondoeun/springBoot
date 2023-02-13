@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<header>
+		공통 템플릿 헤더
+	</header>
+	
+	<footer>
+		공통 템플릿 푸터
+	</footer>
+
+</body>
+</html>

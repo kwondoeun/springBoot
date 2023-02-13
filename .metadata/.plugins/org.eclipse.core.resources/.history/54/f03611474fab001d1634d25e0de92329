@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- 타임리프 명시적 선언 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h3>반복문</h3>
+	[[${list}]]
+	
+	<ul>
+		<li th:each="vo : ${list}">
+			[[${vo.name}]]
+			[[${vo.age}]]
+		</li>
+	</ul>
+	
+	<hr/>
+	
+	
+	<h3>반복문과 state변수 (jstl= varState)</h3>
+	
+	<!-- each에 두번째 변수를 선언하면 상태값을 담아줍니다. (index, count, size, current등) -->
+	<ul>
+		<li th:each="vo, a : ${list}">
+			[[${a.count}]]번 - [[${vo.name}]]
+		</li>
+	</ul>
+	
+	
+	<h3>반복문과 조건문</h3>
+	
+	<ul>
+		<li th:each="vo : ${list}" th:if="${vo.age % 2 == 0}">
+			[[${vo.age + '는 짝수'}]]
+		</li>
+	</ul>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- 타임리프 명시적 선언 -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h3>타임리프 출력과 변수</h3>
+	
+	<!-- 타임리프 문법을 사용하려면 속성앞에 th를 붙입니다. -->
+	<h3 th:text="${'헬로월드'}"></h3>
+	<h3>[[${'헬로월드'}]]</h3>
+	
+	<h3 th:text="${1 == 1}"></h3>
+	<h3>[[${1 == 1}]]</h3>
+
+</body>
+</html>

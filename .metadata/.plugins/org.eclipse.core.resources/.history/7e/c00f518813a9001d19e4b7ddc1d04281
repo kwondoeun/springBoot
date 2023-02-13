@@ -1,0 +1,28 @@
+package com.simple.basic.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration //개별적인 스프링 빈 설정 파일
+public class WebConfig implements WebMvcConfigurer{
+	
+	//빈을 보관하고 있는 장소
+	@Autowired
+	ApplicationContext applicationContext;
+	
+	@Bean //해당 메서드 실행하게됨
+	public void test() {
+		
+	}
+	
+	@Bean
+	public TestBean testBean() {
+		return new TestBean(); //리턴에 실린 이값을 빈으로 등록
+	}
+	
+	
+	
+}

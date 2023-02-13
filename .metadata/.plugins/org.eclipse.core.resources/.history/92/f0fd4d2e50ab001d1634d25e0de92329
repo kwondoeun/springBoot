@@ -1,0 +1,66 @@
+package com.simple.basic.controller;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.simple.basic.command.BuilderVO;
+import com.simple.basic.command.BuilderVO2;
+
+@Controller
+@RequestMapping("/view")
+public class ThymeleafController {
+	
+	@GetMapping("/ex01") //get방식만 허용
+	public String ex01() {
+		
+		return "view/ex01";
+		
+	}
+	
+	@GetMapping("/ex02")
+	public String ex02(Model model) {
+		
+		ArrayList<BuilderVO2> list = new ArrayList<>();
+		for(int i = 1; i <= 10; i++) {
+			
+			BuilderVO2 vo = BuilderVO2
+					            .builder()
+					            .name("홍길동" + i)
+			                    .age(i)
+			                    .build();
+			
+			list.add(vo);
+		}
+		
+		//model
+		model.addAttribute("list", list);
+		
+		return "view/ex02";
+	}
+	
+	
+	@GetMapping("/ex03")
+	public String ex03(Model model) {
+		
+		ArrayList<BuilderVO2> list = new ArrayList<>();
+		for(int i = 1; i <= 10; i++) {
+			
+			BuilderVO2 vo = BuilderVO2
+					            .builder()
+					            .name("홍길동" + i)
+			                    .age(i)
+			                    .build();
+			
+			list.add(vo);
+		}
+		
+		//model
+		model.addAttribute("list", list);
+		
+		return "view/ex03";
+	}
+}

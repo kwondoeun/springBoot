@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- 타임리프 명시적 선언 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	[[${name}]]<br/>
+	[[${vo}]]<br/>
+	
+	<script th:inline="javascript">
+		var aa = '[[${name}]]';
+		var bb = '[[${vo}]]';
+		
+		console.log(bb.name);
+	</script>
+
+</body>
+</html>

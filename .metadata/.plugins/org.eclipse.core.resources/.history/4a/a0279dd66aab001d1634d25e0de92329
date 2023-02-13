@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!-- 타임리프 명시적 선언 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h3>타임리프 include</h3>
+	
+	<!-- fragment를 가져오기 -->
+	<div th:replace="~{}">
+	
+	</div>
+	
+
+</body>
+</html>

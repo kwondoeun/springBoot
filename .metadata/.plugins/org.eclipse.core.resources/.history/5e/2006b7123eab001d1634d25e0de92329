@@ -1,0 +1,8 @@
+package com.simple.basic.command;
+
+public class BuilderVO2 {
+	
+	private String name;
+	private int age;
+
+}
