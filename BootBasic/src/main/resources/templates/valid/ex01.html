@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h3>서버측 유호성 검사</h3>
+	
+	<form action="actionForm" method="post">
+		<!-- null인 경우 에러가 발생하게 되기 때문에 null처리를 진행해야 합니다. -->
+		이름:<input type="text" name="name" th:value="${vo != null ? vo.name : ''}">[[${valid_name}]]<br/>
+		급여:<input type="text" name="salary" th:value="${vo != null ? vo.salary :''}">[[${valid_salary}]]<br/>
+		전화번호:<input type="text" name="phone" th:value="${vo != null ? vo.phone : ''}">[[${valid_phone}]]<br/>
+		이메일:<input type="text" name="email" th:value="${vo != null ? vo.email : ''}">[[${valid_email}]]<br/>
+		
+		<input type="submit" value="확인">
+	</form>
+
+</body>
+</html>
