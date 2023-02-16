@@ -15,5 +15,6 @@ public interface ProductMapper {
 	public ArrayList<ProductVO> getList(@Param("user_id") String user_id,
 			                            @Param("cri") Criteria cri); //조회: 특정회원정보만 조회
 	
-	public int getTotal(String user_id); //전체게시글수
+	public int getTotal(@Param("user_id") String user_id,
+			            @Param("cri")Criteria cri); //전체게시글수
 }
