@@ -98,7 +98,7 @@ public class RestBasicController {
 	//JSON형식의 데이터를 자바의 객체로 맵핑 -> @RequestBody
 	
 	//cros - 기본적으로 서버가 다르면 요청을 거절하는데 (특정 서버에 대하여 허용)
-	//@CrossOrigin(*) -> 다 열린다.
+	//@CrossOrigin(*) -> 다 열린다. (필터를 통한 자바 설정)
 	@CrossOrigin("http://localhost:3000")
 	@PostMapping("/getJson")
 	public String getJson(@RequestBody SimpleVO vo) {
@@ -147,6 +147,33 @@ public class RestBasicController {
 		return entity;
 	}
 	
+	//jquery - ajax예시
+	@CrossOrigin({"http://127.0.0.1:5501",
+		          "http://localhost:5501"})
+	@PostMapping("/getAjax")
+	public Map<String, Object> getAjax(@RequestBody SimpleVO simpleVo) {
+		
+		//받은 데이터
+		System.out.println(simpleVo.toString());
+		
+		//보내는 데이터
+		Map<String, Object> map = new HashMap<>();
+		
+		SimpleVO vo = new SimpleVO(1, "aaa123", "홍길동");
+		map.put("total", 100);
+		map.put("data", vo);
+		
+		return map;
+	}
+	
+	@CrossOrigin("*") //전부허용
+	@GetMapping("/getAjax2/{topic}")
+	public String getAjax2(@PathVariable("topic") String topic) {
+		
+		System.out.println(topic);
+		
+		return "success";
+	}
 	
 	
 	
