@@ -2,11 +2,59 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
   <mapper namespace="com.simple.basic.mapper.TestMapper">
-  	
+  
   	<select id="getTime" resultType="string">
   		select now()
   	</select>
+  	
+  	<select id="joinOne" resultType="MemoVO">
+  		select m.*,
+  			   u.name,
+  			   u.email
+  		from memo m left join users u
+  		on m.writer = u.id
+  	</select>
+  	
+  	<!-- 1:N형식의 조인 -->
+  	<select id="joinTwo" resultMap="joinResult">
+  		select *
+  		from users u left join memo m
+  		on u.id = m.writer
+  	</select>
+  	<!-- 1:N형식의 조인에서는 ORM작업을 직접 표기해야합니다. -->  	
+  	<!-- type에는 리턴의결과 타입, 
+  	     id는 resultMap의 이름 
+  		 column은 데이터베이스의 컬럼값
+  		 property는 처리할 VO의 속성값
+  	-->
+  	<resultMap type="UsersVO" id="joinResult">
+  		<result column="id" property="id"/>
+  		<result column="name" property="name"/>
+  		<result column="email" property="email"/>
+  		
+  		<collection property="memoList" resultMap="memoListResult" />
+  	</resultMap>
+  	
+  	<resultMap type="MemoVO" id="memoListResult">
+  		<result column="mno" property="mno"/>
+  		<result column="writer" property="writer"/>
+  		<result column="memo" property="memo"/>
+  	</resultMap>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	
   </mapper>

@@ -7,6 +7,7 @@
   
   	<insert id="regist" parameterType="ProductVO">
   		insert into PRODUCT(prod_enddate,
+  							prod_category,
   		                    prod_writer,
   		                    prod_name,
   		                    prod_price,
@@ -16,6 +17,7 @@
   		                    prod_content,
   		                    prod_comment )
   		values(#{prod_enddate},
+  			   #{prod_category},
   			   #{prod_writer},
   			   #{prod_name},
   			   #{prod_price},
@@ -27,7 +29,10 @@
   	</insert>
   	
   	<select id="getList" resultType="ProductVO">
-  		select * from PRODUCT
+  	select p.*,
+       a.category_nav
+	from (
+		select * from PRODUCT
   		where prod_writer = #{user_id}
   		
   		<if test="cri.startDate != null and cri.startDate != '' ">
@@ -51,6 +56,22 @@
 		</if>
 		prod_id desc
   		limit #{cri.pageStart}, #{cri.amount}
+	) p 
+	left outer join(
+		SELECT CONCAT(A1.group_ID, A1.CATEGORY_ID) AS CATEGORY_KEY,
+			CASE A1.category_parent_LV
+				WHEN 0 THEN A1.category_detail_NM
+				WHEN 1 THEN CONCAT(A2.category_detail_NM,' > ', A1.category_detail_NM)
+				WHEN 2 THEN CONCAT(A3.category_detail_NM, ' > ', A2.category_detail_NM,' > ', A1.category_detail_NM)
+			END as CATEGORY_NAV
+		FROM PRODUCT_CATEGORY A1
+		LEFT OUTER JOIN PRODUCT_CATEGORY A2
+		ON A1.CATEGORY_PARENT_LV = A2.CATEGORY_LV AND A1.CATEGORY_DETAIL_PARENT_LV = A2.CATEGORY_DETAIL_LV AND A1.GROUP_ID = A2.GROUP_ID
+		LEFT OUTER JOIN PRODUCT_CATEGORY A3
+		ON A2.CATEGORY_PARENT_LV = A3.CATEGORY_LV AND A2.CATEGORY_DETAIL_PARENT_LV = A3.CATEGORY_DETAIL_LV
+		ORDER BY CATEGORY_NAV ASC
+	) a
+	on p.prod_category = a.category_key	
   	</select>
   	
   	<select id="getTotal" resultType="int">
@@ -71,5 +92,18 @@
 		</if>
   	</select>
   	
+  	<!-- 카테고리대분류 lv=1 인 데이터-->
+  	<select id="getCategory" resultType="CategoryVO">
+  		select * from PRODUCT_CATEGORY
+  		where category_lv = 1
+  	</select>
+  	
+  	<!-- 카테고리 중분류, 소분류 group_id, parent_lv, detail_parent_lv에 매칭 -->
+  	<select id="getCategoryChild" resultType="CategoryVO">
+  		select * from PRODUCT_CATEGORY
+  		where group_id = #{group_id}
+  		and category_parent_lv = #{category_lv}
+  		and category_detail_parent_lv = #{category_detail_lv}
+  	</select>
   	
   </mapper>
