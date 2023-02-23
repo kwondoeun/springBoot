@@ -50,7 +50,7 @@ public class ProductController {
 		*/
 		//프로세스
 		//admin이라고 가정
-		session.setAttribute("user_id", "admin"); 
+		//session.setAttribute("user_id", "admin"); 
 		
 		//로그인 한 회원만 조회
 		String user_id = (String)session.getAttribute("user_id");
